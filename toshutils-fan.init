@@ -3,7 +3,7 @@
 # fan:		Starts the Toshiba fan daemon (smart mode)
 #
 # chkconfig:	2345 95 5
-# description:	Stops the laptop fan when battery powered, starts
+# description:	Stops the laptop fan when battery powered, starts \
 #		otherwise.
 
 . /etc/rc.d/init.d/functions
