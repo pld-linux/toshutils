@@ -1,19 +1,24 @@
 Summary:	Toshiba Linux Utilities
 Summary(pl):	Programy dla notebooków firmy Toshiba
 Name:		toshutils
-Version:	2.0
+Version:	2.0.1
 Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	http://www.buzzard.org.uk/toshiba/%{name}-%{version}.tar.gz
+Source1:	%{name}-fan.init
 Patch0:		%{name}-include.patch
 URL:		http://www.buzzard.org.uk/toshiba/
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	gtk+-devel
+BuildRequires:	XFree86-tools
+Requires(post,preun):	chkconfig
+ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_xsbindir	/usr/X11R6/sbin
+%define		_xmandir	/usr/X11R6/man
+%define		_xbindir	/usr/X11R6/bin
 
 %description
 This is a small series of programs to control the more Toshiba
@@ -43,44 +48,51 @@ Toshiba Satellite 15xx, 16xx, 17xx i 35DVD.
 %patch0 -p1
 
 %build
-./configure
+%configure2_13
 %{__make} depend
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sbindir},%{_xsbindir},%{_mandir}/man1}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_xbindir}}
+install -d $RPM_BUILD_ROOT{%{_mandir}/man{1,8},%{_xmandir}/man1}
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d
 
-install src/alarm $RPM_BUILD_ROOT%{_sbindir}
-install src/dispswitch $RPM_BUILD_ROOT%{_sbindir}
-install src/fan $RPM_BUILD_ROOT%{_sbindir}
-install src/fnfind $RPM_BUILD_ROOT%{_sbindir}
-install src/hotkey $RPM_BUILD_ROOT%{_sbindir}
-install src/ownerstring $RPM_BUILD_ROOT%{_sbindir}
-install src/svpw $RPM_BUILD_ROOT%{_sbindir}
-install src/tbacklight $RPM_BUILD_ROOT%{_sbindir}
-install src/tdocked $RPM_BUILD_ROOT%{_sbindir}
+install src/{alarm,dispswitch,fan,fnfind} $RPM_BUILD_ROOT%{_bindir}
+install src/{ownerstring,svpw} $RPM_BUILD_ROOT%{_bindir}
+install src/t{backlight,docked,passwd} $RPM_BUILD_ROOT%{_bindir}
 install src/thotswap $RPM_BUILD_ROOT%{_sbindir}
-install src/tpasswd $RPM_BUILD_ROOT%{_sbindir}
-install src/tuxtime-conf $RPM_BUILD_ROOT%{_xsbindir}
-install src/wmtuxtime $RPM_BUILD_ROOT%{_xsbindir}
+install src/{tuxtime-conf,wmtuxtime,hotkey} $RPM_BUILD_ROOT%{_xbindir}
 install doc/*.1 $RPM_BUILD_ROOT%{_mandir}/man1
+install doc/*.1x $RPM_BUILD_ROOT%{_xmandir}/man1
+install doc/*.8 $RPM_BUILD_ROOT%{_mandir}/man8
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/fan
 
-gzip -9nf ChangeLog CONTRIBUTE COPYING FAQ README README.hotkey TODO
+%post
+/sbin/chkconfig --add fan
+if [ -f /var/lock/subsys/fan ]; then
+	/etc/rc.d/init.d/fan restart >&2
+else
+	echo "Run \"/etc/rc.d/init.d/fan start\" to start Toshiba fan daemon."
+fi
+
+%preun
+if [ "$1" = "0" ]; then
+	if [ -f /var/lock/subsys/fan ]; then
+		/etc/rc.d/init.d/fan stop >&2
+	fi
+	/sbin/chkconfig --del fan
+fi
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
-/bin/mknod -m 666 /dev/toshiba c 10 181
-
-%postun
-/bin/rm -f /dev/toshiba
-
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_prefix}/X11R6/sbin/*
+%attr(755,root,root) %{_sysconfdir}/rc.d/init.d/*
+%attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
-%doc ChangeLog.gz CONTRIBUTE.gz COPYING.gz FAQ.gz README.gz
-%doc README.hotkey.gz TODO.gz
-%{_mandir}/man1/*
+%attr(755,root,root) %{_xbindir}/*
+%doc ChangeLog CONTRIBUTE FAQ README README.hotkey TODO
+%{_mandir}/man*/*
+%{_xmandir}/man*/*
