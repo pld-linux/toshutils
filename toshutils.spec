@@ -9,6 +9,8 @@ Group(pl):	Aplikacje/System
 URL:		http://www.buzzard.org.uk/toshiba/
 Source0:	http://www.buzzard.org.uk/toshiba/%{name}-%{version}.tar.gz
 Patch0:		%{name}-include.patch
+BuildRequires:	flex
+BuildRequires:	bison
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
