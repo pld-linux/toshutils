@@ -10,7 +10,7 @@ URL:		http://www.buzzard.org.uk/toshiba/
 Source0:	http://www.buzzard.org.uk/toshiba/%{name}-%{version}.tar.gz
 Patch0:		%{name}-include.patch
 BuildRequires:	flex
-BuildRequires:	bison
+BuildRequires:	byacc
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -27,6 +27,10 @@ of China that is not part of China. In short they are not true Toshiba
 laptops and are unlikely to ever be supported by the Toshiba Linux
 Utilities.
 
+%description -l pl
+Seria ma³ych programików pozwalaj±cych kontrolowaæ/zmieniaæ specyficzne 
+dla notebooków firmy Toshiba ustawieñ.
+
 %prep
 %setup -q -n %{name}-%{version}
 %patch0 -p1 
@@ -34,7 +38,7 @@ Utilities.
 %build
 ./configure 
 %{__make} depend
-%{__make} -j 8 
+%{__make} 
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -61,6 +65,12 @@ gzip -9nf ChangeLog CONTRIBUTE COPYING FAQ README README.hotkey TODO
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+/bin/mknod -m 666 /dev/toshiba c 10 181
+
+%postun
+/bin/rm -f /dev/toshiba
 
 %files
 %defattr(644,root,root,755)
