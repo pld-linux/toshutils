@@ -3,7 +3,7 @@ Summary(es):	Herramientas para Toshibas para Linux
 Summary(pl):	Programy dla notebooków firmy Toshiba
 Name:		toshutils
 Version:	2.0.1
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/System
 Source0:	http://www.buzzard.org.uk/toshiba/%{name}-%{version}.tar.gz
