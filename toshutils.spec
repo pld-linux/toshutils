@@ -56,7 +56,7 @@ Toshiba Satellite 15xx, 16xx, 17xx i 35DVD.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_xbindir}}
 install -d $RPM_BUILD_ROOT{%{_mandir}/man{1,8},%{_xmandir}/man1}
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d
+install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
 
 install src/{alarm,dispswitch,fan,fnfind} $RPM_BUILD_ROOT%{_bindir}
 install src/{ownerstring,svpw} $RPM_BUILD_ROOT%{_bindir}
@@ -66,7 +66,7 @@ install src/{tuxtime-conf,wmtuxtime,hotkey} $RPM_BUILD_ROOT%{_xbindir}
 install doc/*.1 $RPM_BUILD_ROOT%{_mandir}/man1
 install doc/*.1x $RPM_BUILD_ROOT%{_xmandir}/man1
 install doc/*.8 $RPM_BUILD_ROOT%{_mandir}/man8
-install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/fan
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/fan
 
 %post
 /sbin/chkconfig --add fan
@@ -89,7 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_sysconfdir}/rc.d/init.d/*
+%attr(755,root,root) /etc/rc.d/init.d/*
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_xbindir}/*
