@@ -1,0 +1,48 @@
+diff -Nur toshutils-2.0.1.orig/configure.in toshutils-2.0.1/configure.in
+--- toshutils-2.0.1.orig/configure.in	2001-09-29 14:27:36.000000000 +0200
++++ toshutils-2.0.1/configure.in	2003-11-21 14:13:01.000000000 +0100
+@@ -62,10 +62,9 @@
+   XLIB="-lX11 $X_EXTRA_LIBS"
+   EXTRAFLAGS=""
+   PROGRAMS="$PROGRAMS hotkey wmtuxtime"       # programs to build if X11 found
+-  AC_CHECK_LIB(gtk, gtk_main,
+-    PROGRAMS="$PROGRAMS tuxtime-conf", # progams to build only if X+GTK found
+-    AC_MSG_WARN(*** GTK+ libraries not found.  X code will not be built. ***),
+-    `gtk-config --libs`)
++  PKG_CHECK_MODULES(GTK, gtk+-2.0,
++    PROGRAMS="$PROGRAMS tuxtime-conf",
++    AC_MSG_WARN(*** GTK+ libraries not found.  X code will not be built. ***))
+ else
+   AC_MSG_ERROR([
+ *** X libraries or include files not found. Check 'config.log' for
+@@ -76,8 +75,6 @@
+   EXTRAFLAGS="-DNO_X11"
+ fi
+ 
+-GTK_LIBS=`gtk-config --libs`
+-GTK_CFLAGS=`gtk-config --cflags`
+ AC_SUBST(GTK_LIBS)
+ AC_SUBST(GTK_CFLAGS)
+ 
+diff -Nur toshutils-2.0.1.orig/src/misc.c toshutils-2.0.1/src/misc.c
+--- toshutils-2.0.1.orig/src/misc.c	2001-02-04 17:35:51.000000000 +0100
++++ toshutils-2.0.1/src/misc.c	2003-11-21 15:56:51.000000000 +0100
+@@ -104,8 +104,8 @@
+ 
+ 	/* handle the window manager close signal */
+ 
+-	gtk_signal_connect(GTK_OBJECT(window), "destroy",
+-		GTK_SIGNAL_FUNC(gtk_widget_destroyed), &window);
++	/*gtk_signal_connect(GTK_OBJECT(window), "destroy",
++		GTK_SIGNAL_FUNC(gtk_widget_destroyed), &window);*/
+ 
+ 	button = gtk_button_new_with_label("Ok");
+ 	gtk_widget_set_usize(button, 60, 20);
+@@ -121,6 +121,7 @@
+ 		TRUE, TRUE, 0);
+ 
+ 	style = gtk_widget_get_style(window);
++	gtk_widget_show(window);	// make window->window available
+ 	icon = gdk_pixmap_create_from_xpm_d(window->window, &mask,
+ 		&style->bg[GTK_STATE_NORMAL], (gchar **)warning_xpm);
+ 	pixmap = gtk_pixmap_new(icon, mask);
