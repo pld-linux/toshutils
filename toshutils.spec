@@ -45,7 +45,7 @@ laptopami innych producentów; nie bêd± dzia³aæ tak¿e z komputerami
 Toshiba Satellite 15xx, 16xx, 17xx i 35DVD.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 %patch0 -p1
 
 %build
@@ -90,10 +90,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc ChangeLog CONTRIBUTE FAQ README README.hotkey TODO
 %attr(755,root,root) /etc/rc.d/init.d/*
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_xbindir}/*
-%doc ChangeLog CONTRIBUTE FAQ README README.hotkey TODO
 %{_mandir}/man*/*
 %{_xmandir}/man*/*
