@@ -1,5 +1,5 @@
 Summary:	Toshiba Linux Utilities
-Summary(pl):	Programy dla notebooków firmy Toshiba 
+Summary(pl):	Programy dla notebooków firmy Toshiba
 Name:		toshutils
 Version:	2.0
 Release:	1
@@ -40,12 +40,12 @@ Toshiba Satellite 15xx, 16xx, 17xx i 35DVD.
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch0 -p1 
+%patch0 -p1
 
 %build
-./configure 
+./configure
 %{__make} depend
-%{__make} 
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -81,6 +81,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_prefix}/X11R6/sbin/*
 %attr(755,root,root) %{_sbindir}/*
-%doc ChangeLog.gz CONTRIBUTE.gz COPYING.gz FAQ.gz README.gz 
+%doc ChangeLog.gz CONTRIBUTE.gz COPYING.gz FAQ.gz README.gz
 %doc README.hotkey.gz TODO.gz
-%{_mandir}/man1/* 
+%{_mandir}/man1/*
