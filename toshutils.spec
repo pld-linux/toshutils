@@ -10,16 +10,13 @@ Source0:	http://www.buzzard.org.uk/toshiba/%{name}-%{version}.tar.gz
 Source1:	%{name}-fan.init
 Patch0:		%{name}-include.patch
 URL:		http://www.buzzard.org.uk/toshiba/
+BuildRequires:	XFree86-tools
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	gtk+-devel
-BuildRequires:	XFree86-tools
-Requires(post,preun):	chkconfig
+Requires(post,preun):	/sbin/chkconfig
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_xmandir	/usr/X11R6/man
-%define		_xbindir	/usr/X11R6/bin
 
 %description
 This is a small series of programs to control the more Toshiba
@@ -55,17 +52,17 @@ Toshiba Satellite 15xx, 16xx, 17xx i 35DVD.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_xbindir}}
-install -d $RPM_BUILD_ROOT{%{_mandir}/man{1,8},%{_xmandir}/man1}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir}}
+install -d $RPM_BUILD_ROOT%{_mandir}/man{1,8}
 install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
 
 install src/{alarm,dispswitch,fan,fnfind} $RPM_BUILD_ROOT%{_bindir}
 install src/{ownerstring,svpw} $RPM_BUILD_ROOT%{_bindir}
 install src/t{backlight,docked,passwd} $RPM_BUILD_ROOT%{_bindir}
 install src/thotswap $RPM_BUILD_ROOT%{_sbindir}
-install src/{tuxtime-conf,wmtuxtime,hotkey} $RPM_BUILD_ROOT%{_xbindir}
+install src/{tuxtime-conf,wmtuxtime,hotkey} $RPM_BUILD_ROOT%{_bindir}
 install doc/*.1 $RPM_BUILD_ROOT%{_mandir}/man1
-install doc/*.1x $RPM_BUILD_ROOT%{_xmandir}/man1
+install doc/*.1x $RPM_BUILD_ROOT%{_mandir}/man1
 install doc/*.8 $RPM_BUILD_ROOT%{_mandir}/man8
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/fan
 
@@ -94,6 +91,4 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) /etc/rc.d/init.d/*
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
-%attr(755,root,root) %{_xbindir}/*
 %{_mandir}/man*/*
-%{_xmandir}/man*/*
