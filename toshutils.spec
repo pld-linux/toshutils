@@ -6,6 +6,7 @@ Release:	2
 License:	GPL
 Group:		Applications/System
 Source0:	http://www.buzzard.org.uk/toshiba/%{name}-%{version}.tar.gz
+# Source0-md5:	807589cf1e209eb0a39e1ede427140d5
 Source1:	%{name}-fan.init
 Patch0:		%{name}-include.patch
 URL:		http://www.buzzard.org.uk/toshiba/
