@@ -64,6 +64,7 @@ Toshiba Satellite 15xx, 16xx, 17xx i 35DVD.
 %patch1 -p1
 
 %build
+cp -f %{_datadir}/automake/config.sub .
 %{__aclocal}
 %{__autoconf}
 %configure
