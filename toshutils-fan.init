@@ -8,7 +8,7 @@
 
 . /etc/rc.d/init.d/functions
 
-
+RETVAL=0
 # See how we were called.
 case "$1" in
   start)
@@ -26,7 +26,6 @@ case "$1" in
 	if [ -f /var/lock/subsys/fan ]; then
 		msg_stopping "Toshiba fan daemon"
 		killproc fan
-		RETVAL=$?
 		rm -f /var/lock/subsys/fan
 	else
 		msg_not_running "Toshiba fan daemon"
@@ -34,19 +33,16 @@ case "$1" in
 	;;
   status)
 	status fan
+	exit $?
 	;;
-  restart|reload)
+  restart|force-reload)
 	$0 stop
 	$0 start
 	exit $?
 	;;
-  force-reload)
-	$0 stop && $0 start
-	exit $?
-	;;
   *)
-	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
-	exit 1
+	msg_usage "$0 {start|stop|restart|force-reload|status}"
+	exit 3
 esac
 
 exit $RETVAL
