@@ -1,0 +1,45 @@
+#!/bin/sh
+#
+# fan:		Starts the Toshiba fan daemon (smart mode)
+#
+# chkconfig:	2345 95 5
+# description:	Stops the laptop fan when battery powered, starts
+#		otherwise.
+
+. /etc/rc.d/init.d/functions
+
+# See how we were called.
+case "$1" in
+  start)
+	# Check if the service is already running?
+	if [ ! -f /var/lock/subsys/fan ]; then
+		msg_starting "Toshiba fan daemon"
+		daemon /usr/bin/fan -s
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/fan
+	else
+		msg_Already_Running "Toshiba fan daemon"
+	fi
+	;;
+  stop)
+	if [ -f /var/lock/subsys/fan ]; then
+		msg_stopping "Toshiba fan daemon"
+		killproc gdm
+		rm -f /var/lock/subsys/fan
+	else
+		msg_Not_Running "Toshiba fan daemon"
+	fi
+	;;
+  status)
+	status fan
+	;;
+  restart|reload)
+	$0 stop
+	$0 start
+	;;
+  *)
+	echo "Usage: $0 {start|stop|status|restart|reload}"
+	exit 1
+esac
+
+exit $RETVAL
