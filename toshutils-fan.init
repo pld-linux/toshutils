@@ -24,7 +24,7 @@ case "$1" in
   stop)
 	if [ -f /var/lock/subsys/fan ]; then
 		msg_stopping "Toshiba fan daemon"
-		killproc gdm
+		killproc fan
 		rm -f /var/lock/subsys/fan
 	else
 		msg_Not_Running "Toshiba fan daemon"
