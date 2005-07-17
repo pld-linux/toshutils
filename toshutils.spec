@@ -64,7 +64,7 @@ Toshiba Satellite 15xx, 16xx, 17xx i 35DVD.
 %patch1 -p1
 
 %build
-cp -f %{_datadir}/automake/config.sub .
+cp -f /usr/share/automake/config.sub .
 %{__aclocal}
 %{__autoconf}
 %configure
@@ -73,9 +73,7 @@ cp -f %{_datadir}/automake/config.sub .
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir}}
-install -d $RPM_BUILD_ROOT%{_mandir}/man{1,8}
-install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_mandir}/man{1,8},/etc/rc.d/init.d}
 
 install src/{alarm,dispswitch,fan,fnfind} $RPM_BUILD_ROOT%{_bindir}
 install src/{ownerstring,svpw} $RPM_BUILD_ROOT%{_bindir}
