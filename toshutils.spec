@@ -20,6 +20,7 @@ BuildRequires:	flex
 BuildRequires:	gtk+2-devel
 BuildRequires:	pkgconfig
 Requires(post,preun):	/sbin/chkconfig
+Requires:	rc-scripts
 ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -87,17 +88,11 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/fan
 
 %post
 /sbin/chkconfig --add fan
-if [ -f /var/lock/subsys/fan ]; then
-	/etc/rc.d/init.d/fan restart >&2
-else
-	echo "Run \"/etc/rc.d/init.d/fan start\" to start Toshiba fan daemon."
-fi
+%service fan restart
 
 %preun
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/fan ]; then
-		/etc/rc.d/init.d/fan stop >&2
-	fi
+	%service fan stop
 	/sbin/chkconfig --del fan
 fi
 
