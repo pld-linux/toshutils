@@ -19,6 +19,7 @@ BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	gtk+2-devel
 BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post,preun):	/sbin/chkconfig
 Requires:	rc-scripts
 ExclusiveArch:	%{ix86}
@@ -39,16 +40,17 @@ laptops and are unlikely to ever be supported by the Toshiba Linux
 Utilities.
 
 %description -l es
-Ésta es una serie pequeña de programas para controlar las idiosincracias
-de portátiles de Toshiba. Entre otros habilitan ajustar muchos de los
-parametros normalmente ajustados por MaxTime o Power Saver.
+Ésta es una serie pequeña de programas para controlar las
+idiosincracias de portátiles de Toshiba. Entre otros habilitan ajustar
+muchos de los parametros normalmente ajustados por MaxTime o Power
+Saver.
 
 Como estas herramientas usan código específico para Toshiba, no
 funcionarán con otros portátiles. Además, tampoco servirán para
-Toshiba Satellite 15xx, 16xx, 17xx y 35DVD. Esos modelos contienen BIOS
-de Phoenix y están producidas en aquella parte de China que no es parte
-de China. O sea que no son verdaderos portátiles de Toshiba y es dudoso
-que jamás sean soportados por estas herramientas.
+Toshiba Satellite 15xx, 16xx, 17xx y 35DVD. Esos modelos contienen
+BIOS de Phoenix y están producidas en aquella parte de China que no es
+parte de China. O sea que no son verdaderos portátiles de Toshiba y es
+dudoso que jamás sean soportados por estas herramientas.
 
 %description -l pl
 Seria ma³ych programików pozwalaj±cych kontrolowaæ/zmieniaæ
