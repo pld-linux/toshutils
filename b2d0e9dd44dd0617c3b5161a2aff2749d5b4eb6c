@@ -1,0 +1,10 @@
+- up to 2.0.1
+- don't create /dev/toshiba, already in dev
+- add fan.init
+- BR: XFree86-tools (for xmessage)
+- ExclusiveArch ix86
+- use %configure2_13, not ./configure
+- put the binaries in correct places (bindir, sbindir, xbindir -- as
+  appropriate)
+- add .8 and .1x man pages
+- new doc compression mechanism
