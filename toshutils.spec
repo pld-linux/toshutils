@@ -1,6 +1,6 @@
 Summary:	Toshiba Linux Utilities
-Summary(es):	Herramientas para Toshibas para Linux
-Summary(pl):	Programy dla notebooków firmy Toshiba
+Summary(es.UTF-8):   Herramientas para Toshibas para Linux
+Summary(pl.UTF-8):   Programy dla notebookÃ³w firmy Toshiba
 Name:		toshutils
 Version:	2.0.1
 Release:	3
@@ -39,26 +39,26 @@ of China that is not part of China. In short they are not true Toshiba
 laptops and are unlikely to ever be supported by the Toshiba Linux
 Utilities.
 
-%description -l es
-Ésta es una serie pequeña de programas para controlar las
-idiosincracias de portátiles de Toshiba. Entre otros habilitan ajustar
+%description -l es.UTF-8
+Ã‰sta es una serie pequeÃ±a de programas para controlar las
+idiosincracias de portÃ¡tiles de Toshiba. Entre otros habilitan ajustar
 muchos de los parametros normalmente ajustados por MaxTime o Power
 Saver.
 
-Como estas herramientas usan código específico para Toshiba, no
-funcionarán con otros portátiles. Además, tampoco servirán para
+Como estas herramientas usan cÃ³digo especÃ­fico para Toshiba, no
+funcionarÃ¡n con otros portÃ¡tiles. AdemÃ¡s, tampoco servirÃ¡n para
 Toshiba Satellite 15xx, 16xx, 17xx y 35DVD. Esos modelos contienen
-BIOS de Phoenix y están producidas en aquella parte de China que no es
-parte de China. O sea que no son verdaderos portátiles de Toshiba y es
-dudoso que jamás sean soportados por estas herramientas.
+BIOS de Phoenix y estÃ¡n producidas en aquella parte de China que no es
+parte de China. O sea que no son verdaderos portÃ¡tiles de Toshiba y es
+dudoso que jamÃ¡s sean soportados por estas herramientas.
 
-%description -l pl
-Seria ma³ych programików pozwalaj±cych kontrolowaæ/zmieniaæ
-specyficzne dla notebooków firmy Toshiba ustawienia, w szczególno¶ci
-wiele ustawieñ z narzêdzi Toshiba MaxTome albo Power Saver.
+%description -l pl.UTF-8
+Seria maÅ‚ych programikÃ³w pozwalajÄ…cych kontrolowaÄ‡/zmieniaÄ‡
+specyficzne dla notebookÃ³w firmy Toshiba ustawienia, w szczegÃ³lnoÅ›ci
+wiele ustawieÅ„ z narzÄ™dzi Toshiba MaxTome albo Power Saver.
 
-Te narzêdzia s± przeznaczone dla laptopów Toshiby i nie bêd± dzia³aæ z
-laptopami innych producentów; nie bêd± dzia³aæ tak¿e z komputerami
+Te narzÄ™dzia sÄ… przeznaczone dla laptopÃ³w Toshiby i nie bÄ™dÄ… dziaÅ‚aÄ‡ z
+laptopami innych producentÃ³w; nie bÄ™dÄ… dziaÅ‚aÄ‡ takÅ¼e z komputerami
 Toshiba Satellite 15xx, 16xx, 17xx i 35DVD.
 
 %prep
