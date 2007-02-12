@@ -1,6 +1,6 @@
 Summary:	Toshiba Linux Utilities
-Summary(es.UTF-8):   Herramientas para Toshibas para Linux
-Summary(pl.UTF-8):   Programy dla notebooków firmy Toshiba
+Summary(es.UTF-8):	Herramientas para Toshibas para Linux
+Summary(pl.UTF-8):	Programy dla notebooków firmy Toshiba
 Name:		toshutils
 Version:	2.0.1
 Release:	3
