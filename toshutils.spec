@@ -12,7 +12,6 @@ Source1:	%{name}-fan.init
 Patch0:		%{name}-include.patch
 Patch1:		%{name}-gtk+2.patch
 URL:		http://www.buzzard.org.uk/toshiba/
-BuildRequires:	XFree86-tools
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
@@ -20,6 +19,7 @@ BuildRequires:	flex
 BuildRequires:	gtk+2-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.268
+BuildRequires:	xorg-app-xmessage
 Requires(post,preun):	/sbin/chkconfig
 Requires:	rc-scripts
 ExclusiveArch:	%{ix86}
